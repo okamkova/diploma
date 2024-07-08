@@ -11,13 +11,12 @@ import { FAQsPage } from '../src/pageObjects/faqsPage';
 import { WebinarPage } from '../src/pageObjects/webinarPage';
 import * as helpers from '../src/helpers/common'
 
-test.describe.configure( {mode: "parallel", retries:0, timeout: 100000}); //serial
+test.describe.configure( {mode: "parallel", retries:0, timeout: 100000});
 test.expect({ timeout: 10000 });
 
 test.describe('CAS main UI Tests', () => {
     test.beforeEach( async ({page}) => {
         await page.setViewportSize({ width: 1920, height: 1080});
-        //await page.context().clearCookies();
         const mainPage = PageFactory.getPage("Main", page) as MainPage;
         await mainPage.openPage();
     });
@@ -52,7 +51,7 @@ test.describe('CAS main UI Tests', () => {
         await contactPage.checkContactSupportLogin();
         expect(contactPage.emailError).toBeVisible();
         const organizationErrorText = await contactPage.organizationError.innerText();
-        expect (organizationErrorText).toBe(CASConsts.organizationError);
+        expect(organizationErrorText).toBe(CASConsts.organizationError);
         
     });
 
@@ -60,9 +59,8 @@ test.describe('CAS main UI Tests', () => {
         const mainPage = PageFactory.getPage("Main", page) as MainPage;
         const libraryPage = PageFactory.getPage("Library", page) as LibraryPage;
 
-        await mainPage.resourcesButton.click();
-        await mainPage.pistoiaButton.click();
-        //await libraryPage.checkUrlIsCorrect(libraryPage.titleText, CASUrls.libraryUrl);
+        await mainPage.showResourcesDropDownListBtn.click();
+        await mainPage.pistoiaLibraryButton.click();
         await libraryPage.checkLibraryPageContent(CASConsts.libraryHeader);
         
     });
@@ -71,14 +69,12 @@ test.describe('CAS main UI Tests', () => {
         const mainPage = PageFactory.getPage("Main", page) as MainPage;
         const insightsPage = PageFactory.getPage("Insights", page) as InsightsPage;
 
-        await mainPage.resourcesButton.click();
+        await mainPage.showResourcesDropDownListBtn.click();
         await mainPage.casInsightsButton.click();
-       // await insightsPage.checkUrlIsCorrect(insightsPage.titleText, CASUrls.insightsUrl);
-       // await expect(insightsPage.filtersTitle).toBeVisible();
-       await insightsPage.checkPageIsLoaded();
+        await insightsPage.checkPageIsLoaded();
         await insightsPage.filterSelection();
         await insightsPage.checkResultNumber(insightsPage.materialsArticle,'21', CASConsts.resultNumber21);
-        await (insightsPage.clearByTopicBtn).click();
+        await insightsPage.clearByTopicBtn.click();
         await insightsPage.checkResultNumber(insightsPage.consumerArticle,'100', CASConsts.resultNumber100);
 
     });
@@ -87,8 +83,7 @@ test.describe('CAS main UI Tests', () => {
         const mainPage = PageFactory.getPage("Main", page) as MainPage;
         const trainingPage = PageFactory.getPage("Training", page) as TrainingPage;
 
-        await (mainPage.trainingButton).click();
-        //await trainingPage.checkUrlIsCorrect(trainingPage.titleText, trainingPage.url);
+        await mainPage.trainingButton.click();
         await trainingPage.performQuickSearch(CASConsts.trainingSearchMessage, CASConsts.trainingErrorMessage);
         
     });
@@ -97,12 +92,9 @@ test.describe('CAS main UI Tests', () => {
         const mainPage = PageFactory.getPage("Main", page) as MainPage;
         const trainingPage = PageFactory.getPage("Training", page) as TrainingPage;
 
-        await (mainPage.trainingButton).click();
+        await mainPage.trainingButton.click();
         await trainingPage.turnToMainPage();
         await mainPage.checkUrlOfMainPage();
-       // await trainingPage.checkUrlIsCorrect(trainingPage.titleText, trainingPage.url);
-       // await (page.locator(CASConsts.casImage)).click();
-       // await mainPage.checkUrlIsCorrect(mainPage.aboutButton, mainPage.url);
         
     });
 
@@ -111,9 +103,8 @@ test.describe('CAS main UI Tests', () => {
         const faqsPage = PageFactory.getPage("FAQs", page) as FAQsPage;
 
         await page.locator(mainPage.aboutButton).click();
-        await (mainPage.faqsButton).click();
+        await mainPage.faqsButton.click();
         await faqsPage.checkUrlOfFAQsPage();
-        //await faqsPage.checkUrlIsCorrect(faqsPage.titleText, CASUrls.faqsUrl);
         await faqsPage.checkAnswerRepresentation();
         
     });
@@ -124,7 +115,6 @@ test.describe('CAS main UI Tests', () => {
 
         await mainPage.registerNowButton.click();
         await webinarPage.checkUrlOfWebinarPage();
-        //await webinarPage.checkUrlIsCorrect(webinarPage.titleText, CASUrls.webinarUrl);
         await webinarPage.checkWebinarPageContent(CASConsts.webinarTitleText);
         
     });

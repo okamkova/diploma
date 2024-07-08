@@ -7,7 +7,7 @@ export class TrainingPage extends BasePage {
     readonly page: Page;
     public url: string;
     public titleText: string; 
-    public SearchString: Locator; 
+    public searchString: Locator; 
     public searchResultMessage: string; 
     public searchErrorMessage: string; 
     public casImage: Locator;
@@ -20,7 +20,7 @@ export class TrainingPage extends BasePage {
         this.url = 'https://www.cas.org/training'; 
         //css
         this.titleText = 'h1:nth-child(1)'; 
-        this.SearchString = page.locator('input[class*="bar-2"]'); 
+        this.searchString = page.locator('input[class*="bar-2"]'); 
         this.searchResultMessage = 'div.w-form-done > div'; 
         this.searchErrorMessage = 'div.w-form-fail > div'; 
         this.casImage = page.locator('[src*="CAS"][loading="lazy"]');
@@ -29,8 +29,8 @@ export class TrainingPage extends BasePage {
 
     async performQuickSearch(text: string, textError: string) {
         await helpers.checkUrlIsCorrect(this.page, this.titleText, CASUrls.trainingUrl);
-        await this.SearchString.pressSequentially('Benzene');
-        await this.SearchString.press('Enter');
+        await this.searchString.pressSequentially('Benzene');
+        await this.searchString.press('Enter');
         if(await this.page.locator(this.searchResultMessage).isVisible()) {
         await this.page.waitForSelector(this.searchResultMessage);
         const searchResultMessageText = await (this.page.locator(this.searchResultMessage)).innerText();
@@ -44,7 +44,7 @@ export class TrainingPage extends BasePage {
 
     async turnToMainPage () {
         await helpers.checkUrlIsCorrect(this.page, this.titleText, CASUrls.trainingUrl);
-        await (this.casImage).click();
+        await this.casImage.click();
     }
 
 }

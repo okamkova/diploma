@@ -11,10 +11,10 @@ export class MainPage extends BasePage {
     public chooseLanguageDropdown: Locator; 
     public spanishLanguageButton: Locator; 
     public solutionsButton: Locator; 
-    public SearchString: Locator; 
+    public searchString: Locator; 
     public contactUsButton: Locator; 
-    public resourcesButton: Locator; 
-    public pistoiaButton: Locator; 
+    public showResourcesDropDownListBtn: Locator; 
+    public pistoiaLibraryButton: Locator; 
     public casInsightsButton: Locator; 
     public trainingButton: Locator; 
     public aboutButton: string; 
@@ -33,10 +33,10 @@ export class MainPage extends BasePage {
         this.chooseLanguageDropdown = page.locator('div[class*="n--p"]');
         this.spanishLanguageButton = page.locator('[hreflang*="es" ][class*="ge"]');
         this.solutionsButton = page.locator('[aria-controls*= "t-1"] > div:not([class*="w"])');
-        this.SearchString = page.locator('input[id="search"]');
+        this.searchString = page.locator('input[id="search"]');
         this.contactUsButton = page.locator('[href="/contact"][class*="is"]');
-        this.resourcesButton = page.locator('div[id*="toggle-3"]');
-        this.pistoiaButton = page.locator('a[href*="safety"]');
+        this.showResourcesDropDownListBtn = page.locator('div[id*="toggle-3"]');
+        this.pistoiaLibraryButton = page.locator('a[href*="safety"]');
         this.casInsightsButton = page.locator('[href*="cas-insights"][class*="nav"]');
         this.trainingButton = page.locator('a[href*="training"][class*="nav"]');
         this.aboutButton = 'div[id*="toggle-4"]';
@@ -62,7 +62,7 @@ export class MainPage extends BasePage {
     }
 
     async performSearchInString() {
-        await this.SearchString.fill('Benzene'); 
+        await this.searchString.fill('Benzene'); 
         await this.page.waitForSelector(this.dinamicHeader);
         await this.searchButton.click();
         await this.page.waitForSelector(CASConsts.searchResultSecondString);
@@ -72,7 +72,7 @@ export class MainPage extends BasePage {
 
 
     async clickOnContactUsButton() {
-        await helpers.clickOnButton(this.contactUsButton, this.page, this.casImage);
+        await helpers.clickOnButtonAndWaitForSelectorPresence(this.contactUsButton, this.page, this.casImage);
     }
 
     async checkUrlOfMainPage() {

@@ -5,7 +5,7 @@ export async function checkUrlIsCorrect(page: Page, selector: string, expectedUr
     await expect(page).toHaveURL(expectedUrl);
 }
 
-export async function clickOnButton(locator: Locator, page: Page, selector: string) { 
+export async function clickOnButtonAndWaitForSelectorPresence(locator: Locator, page: Page, selector: string) { 
     await locator.click();
     await page.waitForSelector(selector);
 }

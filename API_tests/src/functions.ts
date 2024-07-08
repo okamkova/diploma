@@ -1,17 +1,16 @@
 import * as superagent from 'superagent';
 import {expect} from '@jest/globals';
 
-export async function getRequest(url: string, error: any, status: number): Promise<any> {
+export async function getRequest(url: string): Promise<any> {
     try {
         const response = await superagent.get(url)
         return response;
     } catch (err: any) {
-        expect(err.message).toBe(error)
-        expect(err.status).toBe(status)
+        return err;
     }
 };
 
-export async function postRequest(url: string, data: any, error: string, status: number): Promise<any> {
+export async function postRequest(url: string, data: any): Promise<any> {
     try {
         const response = await superagent
         .post(url)
@@ -19,12 +18,11 @@ export async function postRequest(url: string, data: any, error: string, status:
         .send(data);
         return response;
     } catch (err: any) {
-        expect(err.message).toBe(error)
-        expect(err.status).toBe(status)
+        return err;
     }
 };
 
-export async function putRequest(url: string, data: any, error: string, status: number): Promise<any> {
+export async function putRequest(url: string, data: any): Promise<any> {
     try {
         const response = await superagent
         .put(url)
@@ -32,12 +30,11 @@ export async function putRequest(url: string, data: any, error: string, status: 
         .send(data);
         return response;
     } catch (err: any) {
-        expect(err.message).toBe(error)
-        expect(err.status).toBe(status)
+        return err;
     }
 };
 
-export async function patchRequest(url: string, data: any, error: string, status: number): Promise<any> {
+export async function patchRequest(url: string, data: any): Promise<any> {
     try {
         const response = await superagent
         .patch(url)
@@ -45,17 +42,15 @@ export async function patchRequest(url: string, data: any, error: string, status
         .send(data);
         return response;
     } catch (err: any) {
-        expect(err.message).toBe(error)
-        expect(err.status).toBe(status)
+        return err;
     }
 };
 
-export async function deleteRequest(url: string, error: string, status: number): Promise<any> {
+export async function deleteRequest(url: string): Promise<any> {
     try {
         const response = await superagent.delete(url)
         return response;
     } catch (err: any) {
-        expect(err.message).toBe(error)
-        expect(err.status).toBe(status)
+        return err;
     }
 };

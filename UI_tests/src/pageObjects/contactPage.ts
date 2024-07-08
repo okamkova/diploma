@@ -39,8 +39,8 @@ export class ContactPage extends BasePage {
 
     async checkButtonsRepresentation(text: string) {
         expect(this.titleText).toHaveClass("promo-hero__title");
-        const CustomerCenterHeaderText = await this.titleText.innerText();
-        expect(CustomerCenterHeaderText).toBe(text);
+        const customerCenterHeaderText = await this.titleText.innerText();
+        expect(customerCenterHeaderText).toBe(text);
         await expect(this.customerSalesHeader).toBeVisible();
         await expect(this.mailBtn).toBeEnabled();
 
