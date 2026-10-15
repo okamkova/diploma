@@ -67,5 +67,3 @@ To generate and view the interactive Allure dashboard locally, execute:
 npm run report:generate
 npm run report:open
 ```
-
-**(Tip: You can add an image/screenshot of your passing Allure charts here to make it look even more professional!)*
