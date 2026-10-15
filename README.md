@@ -40,30 +40,34 @@ npx playwright install
 ```
 
 ### 3. Running Tests
-You can run automated test suites using the following terminal commands:
+The project is split into different test layers (UI, API, Unit). You can run them via the following predefined npm scripts:
 
-* **Run all tests (Headless Mode):**
+* **Run UI Test Suite (Playwright with Headed Browser):**
+  This command automatically clears old reporting data, sets up the config, and executes UI tests.
   ```bash
-  npx playwright test
+  npm run UI_tests
   ```
-* **Run tests in interactive UI Mode (Great for debugging):**
+* **Run API Test Suite (Jest):**
   ```bash
-  npx playwright test --ui
+  npm run api_tests
   ```
-* **Run specific test suite (e.g., navigation):**
+* **Run Unit Test Suite (Jest):**
   ```bash
-  npx playwright test tests/navigation.spec.ts
+  npm run unit_tests
+  ```
+* **Format Code (Prettier):**
+  ```bash
+  npm run format:code
   ```
 
 ---
 
 ## 📊 Test Reporting & Insights
 
-The framework is fully integrated with detailed reporting tools to provide rich insights into execution flows, step-by-step logs, and visual error captures.
+The framework is fully integrated with **Allure Report** to provide rich insights into test execution flows, history, and status.
 
-### Allure Report Generation
-To generate and view the interactive Allure dashboard locally, execute:
+### Allure Report Generation & Open
+To clean previous metrics, generate a fresh interactive dashboard from the results, and automatically open it in your default browser, simply run:
 ```bash
-npm run report:generate
-npm run report:open
+npm run allure_report
 ```
